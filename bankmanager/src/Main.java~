@@ -1,3 +1,5 @@
+import controller.BankAccountManager;
+
 import java.util.Scanner;
 
 public class Main {
@@ -7,46 +9,46 @@ public class Main {
         int choice;
 
         do {
-            System.out.println("-- BANK ACCOUNT MANAGEMENT PROGRAM --");
-            System.out.println("1. Add new account");
-            System.out.println("2. Delete account");
-            System.out.println("3. View all accounts");
-            System.out.println("4. Search for an account");
-            System.out.println("5. Exit");
-            System.out.print("Choose an option: ");
+            System.out.println("-- Chương trình quản lý tài khoản --");
+            System.out.println("1. Thêm tài khoản");
+            System.out.println("2. Xóa tài khoản");
+            System.out.println("3. Hiển thị tài khoản");
+            System.out.println("4. Tìm kiếm tài khoản");
+            System.out.println("5. Thoát");
+            System.out.print("Chọn sử dụng: ");
             choice = scanner.nextInt();
             scanner.nextLine();
 
             switch (choice) {
                 case 1:
-                    System.out.print("Enter account type (1 - Savings, 2 - Checking): ");
+                    System.out.print("Nhập loại tài khoản (1 - Tiết kiệm, 2 - Thanh toán):");
                     int type = scanner.nextInt();
                     scanner.nextLine();
 
-                    System.out.print("Enter account number: ");
+                    System.out.print("Nhập số tài khoản:");
                     String accountNumber = scanner.nextLine();
-                    System.out.print("Enter account holder's name: ");
+                    System.out.print("Nhập tên chủ tài khoản: ");
                     String accountHolderName = scanner.nextLine();
-                    System.out.print("Enter creation date: ");
+                    System.out.print("Nhập ngày tạo: ");
                     String creationDate = scanner.nextLine();
 
                     if (type == 1) {
-                        System.out.print("Enter deposit amount: ");
+                        System.out.print("Nhập số tiền gửi: ");
                         double depositAmount = scanner.nextDouble();
                         scanner.nextLine();
-                        System.out.print("Enter deposit date: ");
+                        System.out.print("Nhập ngày gửi tiền: ");
                         String depositDate = scanner.nextLine();
-                        System.out.print("Enter interest rate: ");
+                        System.out.print("Nhập lãi suất: ");
                         double interestRate = scanner.nextDouble();
-                        System.out.print("Enter term (months): ");
+                        System.out.print("Nhập thời gian (tháng): ");
                         int termMonths = scanner.nextInt();
 
                         SavingsAccount savingsAccount = new SavingsAccount(1, accountNumber, accountHolderName, creationDate, depositAmount, depositDate, interestRate, termMonths);
                         accountManager.addAccount(savingsAccount);
                     } else {
-                        System.out.print("Enter card number: ");
+                        System.out.print("Nhập số thẻ: ");
                         String cardNumber = scanner.nextLine();
-                        System.out.print("Enter account balance: ");
+                        System.out.print("Nhập số dư tài khoản: ");
                         double accountBalance = scanner.nextDouble();
 
                         CheckingAccount checkingAccount = new CheckingAccount(1, accountNumber, accountHolderName, creationDate, cardNumber, accountBalance);
@@ -54,7 +56,7 @@ public class Main {
                     }
                     break;
                 case 2:
-                    System.out.print("Enter account number to delete: ");
+                    System.out.print("Nhập số tài khoản để xóa: ");
                     String deleteAccountNumber = scanner.nextLine();
                     accountManager.deleteAccount(deleteAccountNumber);
                     break;
@@ -62,22 +64,21 @@ public class Main {
                     accountManager.displayAllAccounts();
                     break;
                 case 4:
-                    System.out.print("Enter account number to search: ");
+                    System.out.print("Nhập số tài khoản để tìm kiếm: ");
                     String searchAccountNumber = scanner.nextLine();
                     BankAccount foundAccount = accountManager.findAccount(searchAccountNumber);
                     if (foundAccount != null) {
                         foundAccount.displayAccountInfo();
                     } else {
-                        System.out.println("Account not found.");
+                        System.out.println("Tài khoản không tìm thấy.");
                     }
                     break;
                 case 5:
-                    System.out.println("Exiting program!");
+                    System.out.println("Thoát chương trình!");
                     break;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println("Lựa chọn không hợp lệ. Vui lòng thử lại.");
             }
         } while (choice != 5);
-    }
     }
 }

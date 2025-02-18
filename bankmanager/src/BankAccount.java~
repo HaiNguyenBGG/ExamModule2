@@ -1,11 +1,12 @@
 public abstract class BankAccount {
+    protected static int currentId = 1; // Biến static để tăng ID tự động
     protected int id;
     protected String accountNumber;
     protected String accountHolderName;
-    protected String creationDate; // Ensure this is 'protected'
+    protected String creationDate;
 
-    public BankAccount(int id, String accountNumber, String accountHolderName, String creationDate) {
-        this.id = id;
+    public BankAccount(String accountNumber, String accountHolderName, String creationDate) {
+        this.id = currentId++; // Gán ID hiện tại và tăng giá trị lên
         this.accountNumber = accountNumber;
         this.accountHolderName = accountHolderName;
         this.creationDate = creationDate;

@@ -1,3 +1,5 @@
+package controller;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,9 +29,9 @@ public class BankAccountManager {
         BankAccount account = findAccount(accountNumber);
         if(account != null){
             accountList.remove(account);
-            System.out.println("Deleted account: " + accountNumber);
+            System.out.println("Xóa tài khoản: " + accountNumber);
         } else {
-            System.out.println("Account not found");
+            System.out.println("Không tìm thấy tài khoản: " + accountNumber);
         }
     }
 }
