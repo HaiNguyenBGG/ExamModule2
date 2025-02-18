@@ -25,10 +25,12 @@ public class BankAccountController {
     public void deleteAccount(String accountNumber) throws NotFoundBankAccountException {
         service.deleteAccount(accountNumber);
     }
+
     public void displayAllAccounts() {
+        service.loadAccountsFromCSV();
         service.displayAllAccounts();
     }
-    public void searchAccount(String keyword) {
+    public BankAccount searchAccount(String keyword) {
         List<BankAccount> results = service.searchAccounts(keyword);
         if (results.isEmpty()) {
             System.out.println("Không tìm thấy tài khoản nào chứa từ khóa: " + keyword);
@@ -38,5 +40,10 @@ public class BankAccountController {
                 acc.displayAccountInfo();
             }
         }
+        return null;
     }
+    public BankAccount findAccount(String accountNumber) throws NotFoundBankAccountException {
+        return service.findAccount(accountNumber);
+    }
+
 }

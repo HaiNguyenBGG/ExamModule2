@@ -120,7 +120,7 @@ public class BankAccountService {
                     }
                 }
             }
-            BankAccount.currentId = maxId + 1;
+            currentId = maxId + 1;
         } catch (IOException e) {
             System.out.println("Lỗi khi đọc file dữ liệu!");
         }

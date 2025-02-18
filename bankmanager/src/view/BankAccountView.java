@@ -1,6 +1,7 @@
 package view;
 
 import controller.BankAccountController;
+import model.BankAccount;
 import model.NotFoundBankAccountException;
 
 import java.util.Scanner;
@@ -57,14 +58,14 @@ public class BankAccountView {
         System.out.print("Nhập tên chủ tài khoản: ");
         String accountHolderName = validateStringInput();
 
-        System.out.print("Nhập ngày tạo (YYYY-MM-DD): ");
+        System.out.print("Nhập ngày tạo (DD-MM-YYYY): ");
         String creationDate = validateStringInput();
 
         if (type == 1) {
             System.out.print("Nhập số tiền gửi: ");
             double depositAmount = validatePositiveDouble();
 
-            System.out.print("Nhập ngày gửi (YYYY-MM-DD): ");
+            System.out.print("Nhập ngày gửi (DD-MM-YYYY): ");
             String depositDate = validateStringInput();
 
             System.out.print("Nhập lãi suất (%): ");
@@ -91,29 +92,39 @@ public class BankAccountView {
         }
     }
 
-    private void deleteAccount() throws NotFoundBankAccountException {
+    private void deleteAccount() {
         while (true) {
             System.out.print("Nhập số tài khoản cần xóa (Nhấn Enter để quay lại): ");
             String accountNumber = scanner.nextLine().trim();
+
             if (accountNumber.isEmpty()) {
-                System.out.println("🔙 Quay lại menu chính.");
+                System.out.println("Quay lại menu chính.");
                 return;
             }
-            controller.searchAccount(accountNumber);
-            System.out.print("Bạn có chắc muốn xóa tài khoản này? (Y/N): ");
-            String confirm = scanner.nextLine().trim().toUpperCase();
-            if (confirm.equals("Y")) {
-                controller.deleteAccount(accountNumber);
-                System.out.println("Tài khoản " + accountNumber + " đã bị xóa.");
-                return;
-            } else if (confirm.equals("N")) {
-                System.out.println("Hủy xóa tài khoản.");
-                return;
-            } else {
-                System.out.println("Lựa chọn không hợp lệ. Vui lòng nhập lại.");
+
+            try {
+                BankAccount account = controller.findAccount(accountNumber);
+
+                System.out.print("Bạn có chắc muốn xóa tài khoản này? (Y/N): ");
+                String confirm = scanner.nextLine().trim().toUpperCase();
+
+                if (confirm.equals("Y")) {
+                    controller.deleteAccount(accountNumber);
+                    System.out.println("Tài khoản " + accountNumber + " đã bị xóa.");
+                    return;
+                } else if (confirm.equals("N")) {
+                    System.out.println("Hủy xóa tài khoản.");
+                    return;
+                } else {
+                    System.out.println("Lựa chọn không hợp lệ. Vui lòng nhập lại.");
+                }
+            } catch (NotFoundBankAccountException e) {
+                System.out.println("" + e.getMessage());
+                System.out.println("Vui lòng nhập lại!");
             }
         }
     }
+
 
     private void searchAccount() {
         System.out.print("Nhập từ khóa để tìm kiếm tài khoản: ");

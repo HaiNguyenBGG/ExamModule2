@@ -1,10 +1,12 @@
 package model;
+import java.text.DecimalFormat;
 
 public class SavingsAccount extends BankAccount {
     private double depositAmount;
     private String depositDate;
     private double interestRate;
     private int interestPeriod;
+    private static final DecimalFormat df= new DecimalFormat("#,###.##");
 
     public SavingsAccount(String accountNumber, String accountHolderName, String creationDate,
                           double depositAmount, String depositDate, double interestRate, int interestPeriod) {
@@ -22,7 +24,7 @@ public class SavingsAccount extends BankAccount {
         System.out.println("Số tài khoản: " + accountNumber);
         System.out.println("Tên chủ tài khoản: " + accountHolderName);
         System.out.println("Ngày tạo tài khoản: " + creationDate);
-        System.out.println("Số tiền gửi tiết kiệm: " + depositAmount);
+        System.out.println("Số tiền gửi tiết kiệm: " + df.format(depositAmount) + " VND") ;
         System.out.println("Ngày gửi tiết kiệm: " + depositDate);
         System.out.println("Lãi suất: " + interestRate + "%");
         System.out.println("Kỳ hạn: " + interestPeriod + " tháng");

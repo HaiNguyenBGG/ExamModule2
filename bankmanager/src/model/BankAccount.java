@@ -3,8 +3,8 @@ package model;
 import java.io.*;
 
 public abstract class BankAccount implements Serializable {
-    private static final String ID_FILE_PATH = "data/bank_account.csv";
-    protected static int currentId = loadLastId();
+    private static final String ID_FILE_PATH = "data/id.txt";
+    public static int currentId = loadLastId();
     protected int id;
     public String accountNumber;
     protected String accountHolderName;
@@ -26,11 +26,16 @@ public abstract class BankAccount implements Serializable {
 
     private static int loadLastId() {
         try (BufferedReader reader = new BufferedReader(new FileReader(ID_FILE_PATH))) {
-            return Integer.parseInt(reader.readLine());
+            String idStr = reader.readLine();
+            if (idStr != null && !idStr.isEmpty()) {
+                return Integer.parseInt(idStr);
+            }
         } catch (IOException | NumberFormatException e) {
             return 1;
         }
+        return 1;
     }
+
     private static void saveLastId() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ID_FILE_PATH))) {
             writer.write(String.valueOf(currentId));
@@ -38,4 +43,5 @@ public abstract class BankAccount implements Serializable {
             System.out.println("Lỗi khi lưu ID vào file!");
         }
     }
+
 }

@@ -1,11 +1,8 @@
 package model;
 
-import java.text.DecimalFormat;
-
 public class CheckingAccount extends BankAccount {
     private String cardNumber;
     private double accountBalance;
-    private static final DecimalFormat df = new DecimalFormat("#,###.##");
 
     public CheckingAccount(String accountNumber, String accountHolderName, String creationDate,
                            String cardNumber, double accountBalance) {
@@ -22,7 +19,7 @@ public class CheckingAccount extends BankAccount {
         System.out.println("Tên chủ tài khoản: " + accountHolderName);
         System.out.println("Ngày tạo tài khoản: " + creationDate);
         System.out.println("Số thẻ: " + cardNumber);
-        System.out.println("Số tiền trong tài khoản: " + df.format(accountBalance) + " VND");
+        System.out.println("Số tiền trong tài khoản: " + accountBalance);
     }
 
     @Override
