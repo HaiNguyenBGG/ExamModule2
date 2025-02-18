@@ -2,15 +2,14 @@ public abstract class BankAccount {
     protected int id;
     protected String accountNumber;
     protected String accountHolderName;
-    protected String createdDate;
+    protected String creationDate;
 
-    public BankAccount(int id, String accountNumber, String accountHolderName, String createdDate) {
+    public BankAccount(int id, String accountNumber, String accountHolderName, String creationDate) {
         this.id = id;
         this.accountNumber = accountNumber;
         this.accountHolderName = accountHolderName;
-        this.createdDate = createdDate;
+        this.creationDate = creationDate;
     }
 
     public abstract void displayAccountInfo();
 }
-

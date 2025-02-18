@@ -1,0 +1,35 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class BankAccountManager {
+    private List<BankAccount> accountList;
+    public BankAccountManager() {
+        accountList = new ArrayList<>();
+    }
+    public void addAccount(BankAccount account){
+        accountList.add(account);
+    }
+    public void displayAllAccounts(){
+        for(BankAccount account : accountList){
+            account.displayAccountInfo();
+            System.out.println("----------------------------");
+        }
+    }
+    public BankAccount findAccount(String accountNumber){
+        for (BankAccount account : accountList){
+            if(account.accountNumber.equals(accountNumber)){
+                return account;
+            }
+        }
+        return null;
+    }
+    public void deleteAccount(String accountNumber){
+        BankAccount account = findAccount(accountNumber);
+        if(account != null){
+            accountList.remove(account);
+            System.out.println("Deleted account: " + accountNumber);
+        } else {
+            System.out.println("Account not found");
+        }
+    }
+}
